@@ -3,76 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KARLO STORE | كارلو ستور للشحن</title>
+    <title>KARLO STORE | المتجر الشامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00d2ff; --secondary: #9d50bb; --bg: #05070a; --card: #0f121a; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #e2e8f0; margin: 0; overflow-x: hidden; }
-        header { background: #0f121a; padding: 25px; text-align: center; border-bottom: 2px solid var(--primary); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
-        .logo { font-size: 32px; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
-        .nav-tabs { display: flex; justify-content: center; background: #111; padding: 10px; gap: 10px; overflow-x: auto; }
-        .tab-btn { background: none; border: 1px solid #333; color: #ccc; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-family: 'Cairo'; white-space: nowrap; transition: 0.3s; }
-        .tab-btn.active { background: var(--primary); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--primary); }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        .section { display: none; animation: fadeIn 0.5s ease; }
+        :root { --primary: #00d2ff; --secondary: #9d50bb; --bg: #05070a; --card: rgba(15, 18, 26, 0.9); }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--bg) url('https://images.alphacoders.com/132/1328318.png') no-repeat center center fixed; 
+            background-size: cover;
+            color: #e2e8f0; margin: 0;
+        }
+        .overlay { background: rgba(5, 7, 10, 0.9); min-height: 100vh; width: 100%; padding-bottom: 50px; }
+        header { background: #0f121a; padding: 20px; text-align: center; border-bottom: 2px solid var(--primary); sticky; top:0; z-index:1000; }
+        .logo { font-size: 30px; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
+        
+        .nav-scroll { display: flex; overflow-x: auto; background: #111; padding: 10px; gap: 10px; sticky; top: 75px; z-index: 999; border-bottom: 1px solid #333; }
+        .tab-btn { background: #1a1f2e; border: 1px solid #333; color: #ccc; padding: 10px 20px; cursor: pointer; border-radius: 30px; font-family: 'Cairo'; white-space: nowrap; transition: 0.3s; font-size: 14px; }
+        .tab-btn.active { background: var(--primary); color: #000; font-weight: bold; border-color: var(--primary); }
+
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #222; border-radius: 15px; padding: 20px; text-align: center; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .price-tag { font-size: 22px; color: var(--primary); font-weight: bold; display: block; margin: 15px 0; }
-        .btn-buy { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 12px 25px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
-        .wa-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); z-index: 1000; }
+
+        .category-title { border-right: 5px solid var(--primary); padding-right: 15px; margin: 30px 0 20px; color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .card { background: var(--card); border: 1px solid #222; border-radius: 15px; padding: 20px; text-align: center; backdrop-filter: blur(5px); transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--primary); transform: scale(1.02); }
+        .badge { position: absolute; top: 10px; left: 10px; background: red; color: white; font-size: 11px; padding: 3px 8px; border-radius: 5px; font-weight: bold; }
+        
+        .price-tag { font-size: 22px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
+        .btn-buy { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
+
+        /* تنسيق قسم الدفع */
+        .pay-box { background: #161b22; padding: 20px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #333; }
+        .copy-btn { background: var(--primary); color: #000; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 13px; }
+
+        .wa-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1000; box-shadow: 0 0 20px rgba(37,211,102,0.5); }
     </style>
 </head>
 <body>
+<div class="overlay">
+    <header><div class="logo">KARLO STORE</div></header>
 
-<header><div class="logo">KARLO STORE</div></header>
+    <div class="nav-scroll">
+        <button class="tab-btn active" onclick="openTab(event, 'games')">🎮 شحن ألعاب</button>
+        <button class="tab-btn" onclick="openTab(event, 'cards')">🎫 بطاقات هدايا</button>
+        <button class="tab-btn" onclick="openTab(event, 'social')">📱 سوشيال ميديا</button>
+        <button class="tab-btn" onclick="openTab(event, 'payment')">💰 الدفع</button>
+    </div>
 
-<div class="nav-tabs">
-    <button class="tab-btn active" onclick="openTab(event, 'home')">🏠 الرئيسية</button>
-    <button class="tab-btn" onclick="openTab(event, 'recharge')">💎 شحن الألعاب</button>
-    <button class="tab-btn" onclick="openTab(event, 'payment')">💳 طرق الدفع</button>
+    <div class="container">
+        
+        <div id="games" class="section active">
+            <h3 class="category-title">🔥 فري فاير (عن طريق ID)</h3>
+            <div class="grid">
+                <div class="card"><h3>110 جوهرة</h3><span class="price-tag">12.5 د.ل</span><button class="btn-buy" onclick="order('FF', '110💎', '12.5')">شحن فوري ⚡</button></div>
+                <div class="card"><h3>231 جوهرة</h3><span class="price-tag">26.0 د.ل</span><button class="btn-buy" onclick="order('FF', '231💎', '26')">شحن فوري ⚡</button></div>
+                <div class="card"><h3>583 جوهرة</h3><span class="price-tag">61.0 د.ل</span><button class="btn-buy" onclick="order('FF', '583💎', '61')">شحن فوري ⚡</button></div>
+            </div>
+
+            <h3 class="category-title">🔫 ببجي موبايل (عن طريق ID)</h3>
+            <div class="grid">
+                <div class="card"><h3>60 شدة</h3><span class="price-tag">13 د.ل</span><button class="btn-buy" onclick="order('PUBG', '60 UC', '13')">شحن فوري ⚡</button></div>
+                <div class="card"><h3>325 شدة</h3><span class="price-tag">64 د.ل</span><button class="btn-buy" onclick="order('PUBG', '325 UC', '64')">شحن فوري ⚡</button></div>
+                <div class="card"><h3>660 شدة</h3><span class="price-tag">125 د.ل</span><button class="btn-buy" onclick="order('PUBG', '660 UC', '125')">شحن فوري ⚡</button></div>
+            </div>
+        </div>
+
+        <div id="cards" class="section">
+            <h3 class="category-title">💳 بطاقات الدفع الرقمية</h3>
+            <div class="grid">
+                <div class="card"><div class="badge">الاكثر طلباً</div><h3>Razer Gold $5</h3><span class="price-tag">35 د.ل</span><button class="btn-buy" onclick="order('بطاقة', 'Razer Gold $5', '35')">طلب الكود 🔑</button></div>
+                <div class="card"><h3>iTunes $5</h3><span class="price-tag">42 د.ل</span><button class="btn-buy" onclick="order('بطاقة', 'iTunes $5', '42')">طلب الكود 🔑</button></div>
+                <div class="card"><h3>PlayStation $10</h3><span class="price-tag">75 د.ل</span><button class="btn-buy" onclick="order('بطاقة', 'PS $10', '75')">طلب الكود 🔑</button></div>
+            </div>
+        </div>
+
+        <div id="social" class="section">
+            <h3 class="category-title">📈 خدمات المتابعين (TikTok / Insta)</h3>
+            <div class="grid">
+                <div class="card"><h3>1000 متابع تيك توك</h3><span class="price-tag">25 د.ل</span><button class="btn-buy" onclick="order('سوشيال', '1000 متابع تيك توك', '25')">زيادة الآن ✨</button></div>
+                <div class="card"><h3>1000 متابع إنستقرام</h3><span class="price-tag">20 د.ل</span><button class="btn-buy" onclick="order('سوشيال', '1000 متابع انستا', '20')">زيادة الآن ✨</button></div>
+            </div>
+        </div>
+
+        <div id="payment" class="section">
+            <h3 class="category-title">💰 بيانات الدفع (اضغط للنسخ)</h3>
+            <div style="max-width: 500px; margin: auto;">
+                <div class="pay-box"><span>تداول (المدار): <b>0934551020</b></span><button class="copy-btn" onclick="copyText('0934551020')">نسخ</button></div>
+                <div class="pay-box"><span>سداد (ليبيانا): <b>0922131336</b></span><button class="copy-btn" onclick="copyText('0922131336')">نسخ</button></div>
+                <div class="pay-box"><span>بايننس (ID): <b>1138421583</b></span><button class="copy-btn" onclick="copyText('1138421583')">نسخ</button></div>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="https://wa.me/218934551020" class="wa-float"><img src="https://img.icons8.com/color/48/whatsapp.png" width="35"></a>
 </div>
-
-<div class="container">
-    <div id="home" class="section active">
-        <div style="text-align: center; padding: 50px 0;">
-            <h1>مرحباً بك في <span style="color: var(--primary);">كارلو ستور</span></h1>
-            <p>أسرع خدمة شحن ألعاب في ليبيا 🇱🇾</p>
-            <button class="btn-buy" style="width: auto; padding: 15px 40px;" onclick="document.querySelectorAll('.tab-btn')[1].click()">ابدأ الشحن الآن 🚀</button>
-        </div>
-    </div>
-
-    <div id="recharge" class="section">
-        <h2 style="border-right: 4px solid var(--primary); padding-right: 15px;">خدمات الشحن المتوفرة</h2>
-        <h3>🔥 فري فاير</h3>
-        <div class="grid">
-            <div class="card"><span>110 💎</span> <span class="price-tag">12.5 د.ل</span> <button class="btn-buy" onclick="sendOrder('فري فاير', '110 جوهرة', '12.5')">اطلب الآن ⚡</button></div>
-            <div class="card"><span>231 💎</span> <span class="price-tag">26 د.ل</span> <button class="btn-buy" onclick="sendOrder('فري فاير', '231 جوهرة', '26')">اطلب الآن ⚡</button></div>
-            <div class="card"><span>583 💎</span> <span class="price-tag">61 د.ل</span> <button class="btn-buy" onclick="sendOrder('فري فاير', '583 جوهرة', '61')">اطلب الآن ⚡</button></div>
-        </div>
-        <h3 style="margin-top: 30px;">🔫 ببجي موبايل</h3>
-        <div class="grid">
-            <div class="card"><span>60 UC</span> <span class="price-tag">13 د.ل</span> <button class="btn-buy" onclick="sendOrder('ببجي', '60 شدة', '13')">اطلب الآن ⚡</button></div>
-            <div class="card"><span>325 UC</span> <span class="price-tag">64 د.ل</span> <button class="btn-buy" onclick="sendOrder('ببجي', '325 شدة', '64')">اطلب الآن ⚡</button></div>
-            <div class="card"><span>660 UC</span> <span class="price-tag">125 د.ل</span> <button class="btn-buy" onclick="sendOrder('ببجي', '660 شدة', '125')">اطلب الآن ⚡</button></div>
-        </div>
-    </div>
-
-    <div id="payment" class="section">
-        <h2>طرق الدفع المدعومة 💳</h2>
-        <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="card">🏦 تحويل بنكي</div>
-            <div class="card">💳 سداد / تداول</div>
-            <div class="card">🅿️ PayPal</div>
-            <div class="card">🔗 USDT</div>
-        </div>
-        <div style="text-align: center; margin-top: 20px; color: var(--primary);">للتواصل: 0934551020</div>
-    </div>
-</div>
-
-<a href="https://wa.me/218934551020" class="wa-float"><img src="https://img.icons8.com/color/48/whatsapp.png"></a>
 
 <script>
     function openTab(evt, tabName) {
@@ -84,10 +112,16 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-    function sendOrder(game, item, price) {
-        const id = prompt("أدخل رقم الـ ID الخاص بك:");
-        if (id) {
-            const msg = `طلب شحن من KARLO STORE 📢:\nالخدمة: ${game}\nالمنتج: ${item}\nالسعر: ${price} د.ل\nالآيدي: ${id}`;
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert("✅ تم النسخ: " + text);
+    }
+
+    function order(cat, item, price) {
+        let userDetail = prompt("أدخل (ID اللعبة) أو (رابط الحساب) لإتمام الطلب:");
+        if (userDetail) {
+            const msg = `طلب جديد من KARLO STORE 🛒\n----------------------\nالنوع: ${cat}\nالخدمة: ${item}\nالسعر: ${price} د.ل\nالبيانات: ${userDetail}`;
             window.location.href = `https://wa.me/218934551020?text=${encodeURIComponent(msg)}`;
         }
     }
