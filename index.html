@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KARLO STORE | متجر الشحن والحسابات</title>
+    <title>KARLO STORE | متجر الشحن</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00d2ff; --secondary: #9d50bb; --bg: #05070a; --card: rgba(15, 18, 26, 0.95); }
         body { 
             font-family: 'Cairo', sans-serif; 
-            background: var(--bg) url('https://w0.peakpx.com/wallpaper/726/43/desktop-wallpaper-background-gaming.jpg') no-repeat center center fixed; 
-            background-size: cover; color: #e2e8f0; margin: 0;
+            background: var(--bg); color: #e2e8f0; margin: 0;
         }
-        .overlay { background: rgba(5, 7, 10, 0.85); min-height: 100vh; width: 100%; padding-bottom: 80px; }
+        .overlay { background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.8)), url('https://res.cloudinary.com/dts9v8p9a/image/upload/v1712694000/gaming_bg.jpg'); background-size: cover; min-height: 100vh; width: 100%; padding-bottom: 80px; }
         header { background: #0f121a; padding: 20px; text-align: center; border-bottom: 3px solid var(--primary); }
         .logo { font-size: 30px; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
         
@@ -27,24 +26,23 @@
 
         .game-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         .game-box { 
-            position: relative; height: 200px; border-radius: 20px; overflow: hidden; 
+            position: relative; height: 180px; border-radius: 20px; overflow: hidden; 
             cursor: pointer; border: 2px solid #333; transition: 0.4s;
             display: flex; align-items: flex-end; justify-content: center;
         }
         .game-box:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .game-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: 0.5s; }
-        .game-box:hover img { transform: scale(1.1); opacity: 0.8; }
-        .game-box h2 { position: relative; z-index: 2; margin: 0; font-size: 18px; color: #fff; background: rgba(0,0,0,0.7); width: 100%; text-align: center; padding: 10px 0; font-weight: 900; }
+        .game-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
+        .game-box h2 { position: relative; z-index: 2; margin: 0; font-size: 16px; color: #fff; background: rgba(0,0,0,0.7); width: 100%; text-align: center; padding: 8px 0; font-weight: 900; }
 
         .category-title { border-right: 5px solid var(--primary); padding-right: 15px; margin: 30px 0 20px; color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
         .card { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 15px; text-align: center; transition: 0.3s; }
         .card:hover { border-color: var(--primary); }
         
-        .price-tag { font-size: 20px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
+        .price-tag { font-size: 18px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
         .btn-buy { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
 
-        .add-account-btn { background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; display: block; width: fit-content; margin: 20px auto; font-weight: bold; text-decoration: none; text-align: center; box-shadow: 0 0 15px rgba(37,211,102,0.3); }
+        .add-account-btn { background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; display: block; width: fit-content; margin: 20px auto; font-weight: bold; text-decoration: none; text-align: center; }
 
         .pay-box { background: #161b22; padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-right: 5px solid var(--primary); }
         .copy-btn { background: var(--primary); color: #000; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
@@ -64,11 +62,11 @@
         <div id="games" class="section active">
             <div class="game-selector">
                 <div class="game-box" onclick="showPrices('ff-prices')">
-                    <img src="https://images.alphacoders.com/105/1055755.jpg" alt="Free Fire">
+                    <img src="https://wallpapers.com/images/hd/free-fire-cool-character-vcy054p0v6195c6k.jpg" alt="Free Fire">
                     <h2>شحن فري فاير 🔥</h2>
                 </div>
                 <div class="game-box" onclick="showPrices('pubg-prices')">
-                    <img src="https://images4.alphacoders.com/906/906326.jpg" alt="PUBG">
+                    <img src="https://wallpapers.com/images/hd/pubg-mobile-player-with-gun-r9y0r1p9p9r9p9r9.jpg" alt="PUBG">
                     <h2>شحن ببجي 🎟️</h2>
                 </div>
             </div>
@@ -76,26 +74,26 @@
             <div id="ff-prices" class="price-section" style="display: none;">
                 <h3 class="category-title">💎 أسعار فري فاير</h3>
                 <div class="grid">
-                    <div class="card"><h3>110💎</h3><span class="price-tag">12.5 د.ل</span><button class="btn-buy" onclick="order('FF', '110💎', '12.5')">طلب ⚡</button></div>
-                    <div class="card"><h3>231💎</h3><span class="price-tag">26 د.ل</span><button class="btn-buy" onclick="order('FF', '231💎', '26')">طلب ⚡</button></div>
-                    <div class="card"><h3>583💎</h3><span class="price-tag">61 د.ل</span><button class="btn-buy" onclick="order('FF', '583💎', '61')">طلب ⚡</button></div>
-                    <div class="card"><h3>1188💎</h3><span class="price-tag">124 د.ل</span><button class="btn-buy" onclick="order('FF', '1188💎', '124')">طلب ⚡</button></div>
+                    <div class="card"><h3>110💎</h3><span class="price-tag">12.5 د.ل</span><button class="btn-buy" onclick="order('FF', '110💎', '12.5')">اطلب ⚡</button></div>
+                    <div class="card"><h3>231💎</h3><span class="price-tag">26 د.ل</span><button class="btn-buy" onclick="order('FF', '231💎', '26')">اطلب ⚡</button></div>
+                    <div class="card"><h3>583💎</h3><span class="price-tag">61 د.ل</span><button class="btn-buy" onclick="order('FF', '583💎', '61')">اطلب ⚡</button></div>
+                    <div class="card"><h3>1188💎</h3><span class="price-tag">124 د.ل</span><button class="btn-buy" onclick="order('FF', '1188💎', '124')">اطلب ⚡</button></div>
                 </div>
             </div>
 
             <div id="pubg-prices" class="price-section" style="display: none;">
                 <h3 class="category-title">🎟️ أسعار ببجي موبايل</h3>
                 <div class="grid">
-                    <div class="card"><h3>60 شدة</h3><span class="price-tag">13 د.ل</span><button class="btn-buy" onclick="order('PUBG', '60 UC', '13')">طلب ⚡</button></div>
-                    <div class="card"><h3>325 شدة</h3><span class="price-tag">64 د.ل</span><button class="btn-buy" onclick="order('PUBG', '325 UC', '64')">طلب ⚡</button></div>
-                    <div class="card"><h3>660 شدة</h3><span class="price-tag">125 د.ل</span><button class="btn-buy" onclick="order('PUBG', '660 UC', '125')">طلب ⚡</button></div>
-                    <div class="card"><h3>1800 شدة</h3><span class="price-tag">315 د.ل</span><button class="btn-buy" onclick="order('PUBG', '1800 UC', '315')">طلب ⚡</button></div>
-                    <div class="card"><h3>3850 شدة</h3><span class="price-tag">623 د.ل</span><button class="btn-buy" onclick="order('PUBG', '3850 UC', '623')">طلب ⚡</button></div>
-                    <div class="card"><h3>8100 شدة</h3><span class="price-tag">1253 د.ل</span><button class="btn-buy" onclick="order('PUBG', '8100 UC', '1253')">طلب ⚡</button></div>
+                    <div class="card"><h3>60 شدة</h3><span class="price-tag">13 د.ل</span><button class="btn-buy" onclick="order('PUBG', '60 UC', '13')">اطلب ⚡</button></div>
+                    <div class="card"><h3>325 شدة</h3><span class="price-tag">64 د.ل</span><button class="btn-buy" onclick="order('PUBG', '325 UC', '64')">اطلب ⚡</button></div>
+                    <div class="card"><h3>660 شدة</h3><span class="price-tag">125 د.ل</span><button class="btn-buy" onclick="order('PUBG', '660 UC', '125')">اطلب ⚡</button></div>
+                    <div class="card"><h3>1800 شدة</h3><span class="price-tag">315 د.ل</span><button class="btn-buy" onclick="order('PUBG', '1800 UC', '315')">اطلب ⚡</button></div>
+                    <div class="card"><h3>3850 شدة</h3><span class="price-tag">623 د.ل</span><button class="btn-buy" onclick="order('PUBG', '3850 UC', '623')">اطلب ⚡</button></div>
+                    <div class="card"><h3>8100 شدة</h3><span class="price-tag">1253 د.ل</span><button class="btn-buy" onclick="order('PUBG', '8100 UC', '1253')">اطلب ⚡</button></div>
                 </div>
             </div>
         </div>
-
+        
         <div id="accounts" class="section">
             <h3 class="category-title">👤 حسابات معروضة</h3>
             <div class="grid">
@@ -127,7 +125,6 @@
         document.getElementById('ff-prices').style.display = 'none';
         document.getElementById('pubg-prices').style.display = 'none';
         document.getElementById(id).style.display = 'block';
-        window.scrollTo({ top: 200, behavior: 'smooth' });
     }
     function copyText(text) {
         navigator.clipboard.writeText(text);
