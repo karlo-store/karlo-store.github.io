@@ -8,135 +8,126 @@
     <style>
         :root { --primary: #00d2ff; --secondary: #9d50bb; --bg: #05070a; --card: rgba(15, 18, 26, 0.95); }
         body { 
-            font-family: 'Cairo', sans-serif; 
-            background: var(--bg); color: #e2e8f0; margin: 0;
+            margin: 0; font-family: 'Cairo', sans-serif; 
+            background: var(--bg) url('https://w0.peakpx.com/wallpaper/726/43/desktop-wallpaper-background-gaming.jpg') no-repeat center center fixed; 
+            background-size: cover; color: #fff; 
         }
-        .overlay { background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.8)), url('https://res.cloudinary.com/dts9v8p9a/image/upload/v1712694000/gaming_bg.jpg'); background-size: cover; min-height: 100vh; width: 100%; padding-bottom: 80px; }
-        header { background: #0f121a; padding: 20px; text-align: center; border-bottom: 3px solid var(--primary); }
-        .logo { font-size: 30px; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
+        .overlay { background: rgba(0,0,0,0.85); min-height: 100vh; padding-bottom: 60px; }
+        header { text-align: center; padding: 20px; border-bottom: 2px solid var(--primary); background: rgba(15, 18, 26, 0.8); }
+        .logo { font-size: 30px; font-weight: 900; text-shadow: 0 0 15px var(--primary); }
         
-        .nav-scroll { display: flex; overflow-x: auto; background: rgba(0,0,0,0.8); padding: 12px; gap: 10px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); justify-content: center; }
-        .tab-btn { background: #1a1f2e; border: 1px solid #444; color: #ccc; padding: 10px 18px; cursor: pointer; border-radius: 30px; font-family: 'Cairo'; white-space: nowrap; transition: 0.3s; }
-        .tab-btn.active { background: var(--primary); color: #000; font-weight: bold; box-shadow: 0 0 10px var(--primary); }
+        .nav { display: flex; justify-content: center; gap: 10px; padding: 15px; position: sticky; top: 0; background: #000000cc; backdrop-filter: blur(10px); z-index: 1000; }
+        .nav button { padding: 10px 20px; border: none; border-radius: 25px; background: #1a1f2e; color: #ccc; cursor: pointer; font-family: 'Cairo'; font-weight: bold; }
+        .nav button.active { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary); }
 
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section { display: none; animation: fadeIn 0.4s ease; }
+        .container { max-width: 1000px; margin: auto; padding: 15px; }
+        .section { display: none; animation: fadeIn 0.5s; }
         .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
 
-        .game-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        /* ستايل المربعات والصور */
+        .game-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .game-box { 
-            position: relative; height: 180px; border-radius: 20px; overflow: hidden; 
-            cursor: pointer; border: 2px solid #333; transition: 0.4s;
-            display: flex; align-items: flex-end; justify-content: center;
+            position: relative; height: 160px; border-radius: 20px; overflow: hidden; 
+            cursor: pointer; border: 2px solid #333; display: flex; align-items: flex-end; 
         }
-        .game-box:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .game-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
-        .game-box h2 { position: relative; z-index: 2; margin: 0; font-size: 16px; color: #fff; background: rgba(0,0,0,0.7); width: 100%; text-align: center; padding: 8px 0; font-weight: 900; }
+        .game-box:hover { border-color: var(--primary); transform: scale(1.02); transition: 0.3s; }
+        .game-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.7; }
+        .game-box h2 { position: relative; z-index: 2; background: rgba(0,0,0,0.8); width: 100%; text-align: center; margin: 0; padding: 8px 0; font-size: 16px; font-weight: 900; }
 
-        .category-title { border-right: 5px solid var(--primary); padding-right: 15px; margin: 30px 0 20px; color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-        .card { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 15px; text-align: center; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 12px; }
+        .card { background: var(--card); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #333; }
+        .price { color: var(--primary); font-weight: 900; font-size: 18px; margin: 10px 0; }
         
-        .price-tag { font-size: 18px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
-        .btn-buy { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
-
-        .add-account-btn { background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; display: block; width: fit-content; margin: 20px auto; font-weight: bold; text-decoration: none; text-align: center; }
-
-        .pay-box { background: #161b22; padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-right: 5px solid var(--primary); }
+        button.buy { width: 100%; padding: 10px; border: none; border-radius: 8px; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: #fff; cursor: pointer; font-family: 'Cairo'; font-weight: bold; }
+        
+        .pay-info { background: #161b22; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 5px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
         .copy-btn { background: var(--primary); color: #000; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 <div class="overlay">
     <header><div class="logo">KARLO STORE</div></header>
-
-    <div class="nav-scroll">
-        <button class="tab-btn active" onclick="openTab(event, 'games')">🎮 الشحن</button>
-        <button class="tab-btn" onclick="openTab(event, 'accounts')">👤 حسابات</button>
-        <button class="tab-btn" onclick="openTab(event, 'payment')">💰 الدفع</button>
+    
+    <div class="nav">
+        <button id="btn-games" class="active" onclick="showTab('games')">🎮 الشحن</button>
+        <button id="btn-acc" onclick="showTab('accounts')">👤 حسابات</button>
+        <button id="btn-pay" onclick="showTab('payment')">💰 الدفع</button>
     </div>
 
     <div class="container">
         <div id="games" class="section active">
             <div class="game-selector">
-                <div class="game-box" onclick="showPrices('ff-prices')">
-                    <img src="https://wallpapers.com/images/hd/free-fire-cool-character-vcy054p0v6195c6k.jpg" alt="Free Fire">
-                    <h2>شحن فري فاير 🔥</h2>
+                <div class="game-box" onclick="togglePrices('ff')">
+                    <img src="https://w0.peakpx.com/wallpaper/744/518/wallpaper-free-fire-thumbnail.jpg">
+                    <h2>فري فاير 🔥</h2>
                 </div>
-                <div class="game-box" onclick="showPrices('pubg-prices')">
-                    <img src="https://wallpapers.com/images/hd/pubg-mobile-player-with-gun-r9y0r1p9p9r9p9r9.jpg" alt="PUBG">
-                    <h2>شحن ببجي 🎟️</h2>
-                </div>
-            </div>
-
-            <div id="ff-prices" class="price-section" style="display: none;">
-                <h3 class="category-title">💎 أسعار فري فاير</h3>
-                <div class="grid">
-                    <div class="card"><h3>110💎</h3><span class="price-tag">12.5 د.ل</span><button class="btn-buy" onclick="order('FF', '110💎', '12.5')">اطلب ⚡</button></div>
-                    <div class="card"><h3>231💎</h3><span class="price-tag">26 د.ل</span><button class="btn-buy" onclick="order('FF', '231💎', '26')">اطلب ⚡</button></div>
-                    <div class="card"><h3>583💎</h3><span class="price-tag">61 د.ل</span><button class="btn-buy" onclick="order('FF', '583💎', '61')">اطلب ⚡</button></div>
-                    <div class="card"><h3>1188💎</h3><span class="price-tag">124 د.ل</span><button class="btn-buy" onclick="order('FF', '1188💎', '124')">اطلب ⚡</button></div>
+                <div class="game-box" onclick="togglePrices('pubg')">
+                    <img src="https://w0.peakpx.com/wallpaper/32/342/wallpaper-pubg-mobile-thumbnail.jpg">
+                    <h2>ببجي 🎟️</h2>
                 </div>
             </div>
 
-            <div id="pubg-prices" class="price-section" style="display: none;">
-                <h3 class="category-title">🎟️ أسعار ببجي موبايل</h3>
+            <div id="ff-list" style="display:none">
+                <h3 style="text-align:center; color:var(--primary)">💎 جواهر فري فاير</h3>
                 <div class="grid">
-                    <div class="card"><h3>60 شدة</h3><span class="price-tag">13 د.ل</span><button class="btn-buy" onclick="order('PUBG', '60 UC', '13')">اطلب ⚡</button></div>
-                    <div class="card"><h3>325 شدة</h3><span class="price-tag">64 د.ل</span><button class="btn-buy" onclick="order('PUBG', '325 UC', '64')">اطلب ⚡</button></div>
-                    <div class="card"><h3>660 شدة</h3><span class="price-tag">125 د.ل</span><button class="btn-buy" onclick="order('PUBG', '660 UC', '125')">اطلب ⚡</button></div>
-                    <div class="card"><h3>1800 شدة</h3><span class="price-tag">315 د.ل</span><button class="btn-buy" onclick="order('PUBG', '1800 UC', '315')">اطلب ⚡</button></div>
-                    <div class="card"><h3>3850 شدة</h3><span class="price-tag">623 د.ل</span><button class="btn-buy" onclick="order('PUBG', '3850 UC', '623')">اطلب ⚡</button></div>
-                    <div class="card"><h3>8100 شدة</h3><span class="price-tag">1253 د.ل</span><button class="btn-buy" onclick="order('PUBG', '8100 UC', '1253')">اطلب ⚡</button></div>
+                    <div class="card"><div>110💎</div><div class="price">12.5 د.ل</div><button class="buy" onclick="order('FF', '110💎', '12.5')">طلب ⚡</button></div>
+                    <div class="card"><div>231💎</div><div class="price">26 د.ل</div><button class="buy" onclick="order('FF', '231💎', '26')">طلب ⚡</button></div>
+                    <div class="card"><div>583💎</div><div class="price">61 د.ل</div><button class="buy" onclick="order('FF', '583💎', '61')">طلب ⚡</button></div>
+                    <div class="card"><div>1188💎</div><div class="price">124 د.ل</div><button class="buy" onclick="order('FF', '1188💎', '124')">طلب ⚡</button></div>
+                </div>
+            </div>
+
+            <div id="pubg-list" style="display:none">
+                <h3 style="text-align:center; color:var(--primary)">🎟️ شدات ببجي</h3>
+                <div class="grid">
+                    <div class="card"><h3>60 شدة</h3><div class="price">13 د.ل</div><button class="buy" onclick="order('PUBG', '60 UC', '13')">طلب ⚡</button></div>
+                    <div class="card"><h3>325 شدة</h3><div class="price">64 د.ل</div><button class="buy" onclick="order('PUBG', '325 UC', '64')">طلب ⚡</button></div>
+                    <div class="card"><h3>660 شدة</h3><div class="price">125 د.ل</div><button class="buy" onclick="order('PUBG', '660 UC', '125')">طلب ⚡</button></div>
+                    <div class="card"><h3>1800 شدة</h3><div class="price">315 د.ل</div><button class="buy" onclick="order('PUBG', '1800 UC', '315')">طلب ⚡</button></div>
                 </div>
             </div>
         </div>
-        
+
         <div id="accounts" class="section">
-            <h3 class="category-title">👤 حسابات معروضة</h3>
+            <h3 style="border-right: 4px solid var(--primary); padding-right: 10px;">👤 حسابات للبيع</h3>
             <div class="grid">
-                <div class="card"><h3>حساب ليفل 60</h3><p>سكنات نادرة</p><span class="price-tag">150 د.ل</span><button class="btn-buy" onclick="orderAccount('حساب ليفل 60', '150')">شراء 🛒</button></div>
+                <div class="card">
+                    <h3>حساب فري فاير</h3>
+                    <p>ليفل 60 - نادر</p>
+                    <div class="price">150 د.ل</div>
+                    <button class="buy" onclick="orderAccount('حساب FF ليفل 60', '150')">شراء 🛒</button>
+                </div>
             </div>
-            <a href="https://wa.me/218934551020?text=أريد عرض حسابي" class="add-account-btn">➕ أضف حسابك</a>
         </div>
 
         <div id="payment" class="section">
-            <h3 class="category-title">💰 الدفع</h3>
-            <div class="pay-box"><span>تداول: 0934551020</span><button class="copy-btn" onclick="copyText('0934551020')">نسخ</button></div>
-            <div class="pay-box"><span>سداد: 0922131336</span><button class="copy-btn" onclick="copyText('0922131336')">نسخ</button></div>
-            <div class="pay-box"><span>بايننس: 1138421583</span><button class="copy-btn" onclick="copyText('1138421583')">نسخ</button></div>
+            <h3 style="border-right: 4px solid var(--primary); padding-right: 10px;">💰 بيانات الدفع</h3>
+            <div class="pay-info"><span>تداول: 0934551020</span><button class="copy-btn" onclick="copy('0934551020')">نسخ</button></div>
+            <div class="pay-info"><span>سداد: 0922131336</span><button class="copy-btn" onclick="copy('0922131336')">نسخ</button></div>
+            <div class="pay-info"><span>بايننس: 1138421583</span><button class="copy-btn" onclick="copy('1138421583')">نسخ</button></div>
         </div>
     </div>
 </div>
 
 <script>
-    function openTab(evt, tabName) {
-        var i, section, tablinks;
-        section = document.getElementsByClassName("section");
-        for (i = 0; i < section.length; i++) { section[i].style.display = "none"; }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+    function showTab(tab) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById(tab).classList.add('active');
+        document.getElementById('btn-' + (tab === 'games' ? 'games' : tab === 'accounts' ? 'acc' : 'pay')).classList.add('active');
     }
-    function showPrices(id) {
-        document.getElementById('ff-prices').style.display = 'none';
-        document.getElementById('pubg-prices').style.display = 'none';
-        document.getElementById(id).style.display = 'block';
+    function togglePrices(game) {
+        document.getElementById('ff-list').style.display = game === 'ff' ? 'block' : 'none';
+        document.getElementById('pubg-list').style.display = game === 'pubg' ? 'block' : 'none';
+        window.scrollTo({ top: 300, behavior: 'smooth' });
     }
-    function copyText(text) {
-        navigator.clipboard.writeText(text);
-        alert("✅ تم النسخ: " + text);
+    function copy(txt) { navigator.clipboard.writeText(txt); alert('تم النسخ: ' + txt); }
+    function order(g, i, p) { 
+        let id = prompt('أدخل الآيدي:');
+        if(id) window.location.href = `https://wa.me/218934551020?text=طلب ${g}: ${i} بـ ${p} د.ل - ID: ${id}`;
     }
-    function order(game, item, price) {
-        let id = prompt("أدخل الآيدي:");
-        if(id) window.location.href = `https://wa.me/218934551020?text=طلب ${game}: ${item} بـ ${price} د.ل - ID: ${id}`;
-    }
-    function orderAccount(name, price) {
-        window.location.href = `https://wa.me/218934551020?text=شراء ${name} بـ ${price} د.ل`;
-    }
+    function orderAccount(n, p) { window.location.href = `https://wa.me/218934551020?text=شراء ${n} بـ ${p} د.ل`; }
 </script>
 </body>
 </html>
